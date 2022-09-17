@@ -1,48 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   V.cpp                                              :+:      :+:    :+:   */
+/*   Z.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/11 16:29:21 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/11 17:02:50 by nhanafi          ###   ########.fr       */
+/*   Created: 2022/09/07 09:15:21 by nhanafi           #+#    #+#             */
+/*   Updated: 2022/09/07 17:11:18 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <set>
+#include <utility>
 #include <map>
+#include <set>
+#include <algorithm>
 #include <math.h>
+#include <iterator>
 using namespace std;
 
+bool cmp(pair<string , int>& a, pair<string , int>& b)
+{
+    return a.second > b.second;
+}
 
 int main()
 {
-    long long n;
-    cin >> n;
-    map <int, int> mp;
-    int i = 2;
-    while(n > 1)
+    int t;
+    cin >> t;
+    cin.ignore();
+    while(t--)
     {
-        while(n % i == 0)
+        int n;
+        cin >> n;
+        vector<pair<string , int> > vec(n);
+        for(int i = 0; i < n;i++)
         {
-            mp[i]++;
-            n = n / i;
+            string s;
+            int age;
+            cin >> s >> age;
+            vec[i]= {s,age};
         }
-        i++;
+        sort(vec.begin(), vec.end(), cmp);
+        for (int i = 0; i < n; i++)
+            cout << vec[i].first << endl;
     }
-    
-    for (std::map<int,int>::iterator  it = mp.begin(); it != mp.end(); it++)
-    {
-        if(it != mp.begin())
-            cout << "*";
-        cout << it->first;
-        if(it->second != 1)
-            cout << "^" << it->second;
-    }
-    
-    
 }

@@ -1,48 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   V.cpp                                              :+:      :+:    :+:   */
+/*   M.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/11 16:29:21 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/11 17:02:50 by nhanafi          ###   ########.fr       */
+/*   Created: 2022/09/07 17:13:07 by nhanafi           #+#    #+#             */
+/*   Updated: 2022/09/07 17:25:20 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <set>
+#include <utility>
 #include <map>
+#include <set>
+#include <algorithm>
 #include <math.h>
+#include <iterator>
 using namespace std;
-
 
 int main()
 {
-    long long n;
+    int n,res = 0;
     cin >> n;
-    map <int, int> mp;
-    int i = 2;
-    while(n > 1)
+    set <long long> st;
+    map <long long, int> mp;
+    for (int i = 0; i < n; i++)
     {
-        while(n % i == 0)
+        long long a;
+        cin >> a;
+        if(a > n)
+            res++;
+        else
         {
-            mp[i]++;
-            n = n / i;
+            st.insert(a);
+            mp[a]++;
         }
-        i++;
     }
-    
-    for (std::map<int,int>::iterator  it = mp.begin(); it != mp.end(); it++)
+    for (set<long long>::iterator it = st.begin(); it != st.end(); it++)
     {
-        if(it != mp.begin())
-            cout << "*";
-        cout << it->first;
-        if(it->second != 1)
-            cout << "^" << it->second;
+        if(*it > mp[*it])
+            res += mp[*it];
+        else if(*it < mp[*it])
+            res += mp[*it] - *it;
     }
-    
+    cout << res;
     
 }

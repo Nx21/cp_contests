@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain.cpp                                          :+:      :+:    :+:   */
+/*   C.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:37:28 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/05 15:44:20 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/09/05 13:49:28 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,41 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <map>
 using namespace std;
 
 int main()
 {
-    set <long long> st;
-    map <long long, int> mp;
-    int n;
-    while(1)
+    freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+    int n,m,a;
+    cin >> n;
+    cin >> m;
+    int j = 0;
+    if(n > m)
     {
-        cin >> n;
-        if(n == 0)
-            return 0;
-        if(n == 1)
+        for (int i = 0; i < n + m; i++)
         {
-           long long k,p;
-           cin >> k >> p;
-           mp[p] = k;
-           st.insert(p);
-        }
-        if(n == 3)
-        {
-            if(st.size() == 0)
-                cout << 0 << "\n";
-            else
+            if(j < m && i % 2)
             {
-                cout << mp[*st.begin()]  << "\n";
-                st.erase(*st.begin());
+                cout << "G";
+                j++;
             }
-        }
-        if(n == 2)
-        {
-            if(st.size() == 0)
-                cout << 0 << "\n";
-            else
-            {
-                cout << mp[*prev(st.end())]  << "\n";
-                st.erase(*prev(st.end()));
-            }
+            else 
+                cout << "B";
         }
     }
+    else
+    {
+        for (int i = 0; i < n + m; i++)
+        {
+            if(j < n && i % 2)
+            {
+                cout << "B";
+                j++;
+            }
+            else 
+                cout << "G";
+        }
+    }
+    cout << "\n";
 }

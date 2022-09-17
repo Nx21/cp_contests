@@ -1,5 +1,22 @@
 {
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "iterator": "cpp",
+        "ios": "cpp",
+        "__locale": "cpp",
+        "__tree": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "bitset": "cpp",
+        "memory": "cpp",
+        "iosfwd": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "algorithm": "cpp"
     }
 }

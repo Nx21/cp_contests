@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 09:27:29 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/11 17:13:02 by nhanafi          ###   ########.fr       */
+/*   Created: 2022/09/15 16:51:08 by nhanafi           #+#    #+#             */
+/*   Updated: 2022/09/15 17:06:18 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,28 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <map>
+#include <utility>
 using namespace std;
 
 int main()
 {
-    int n;
-    long long x, res = 0;
-    cin >> n >> x;
-    vector <long long> arr(n + 1);
-    map <long long, int> mp;
-    mp[0] = 1;
-    for (int i = 1; i <= n; i++)
+    long long n;
+    set <long long> st;
+    long long a;
+    cin >> n;
+    for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
-        arr[i] += arr[i - 1];
-        res += mp[arr[i] - x];
-        mp[arr[i]]++;
+        cin >> a;
+        st.insert(a);
     }
-    cout << res << endl;
+    int m;
+    cin >> m;
+    for (int i = 0; i < m; i++)
+    {
+        cin >> a;
+        if(st.find(a) != st.end())
+            cout << "YES\n";
+        else
+            cout << "NO\n";
+    } 
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain.cpp                                          :+:      :+:    :+:   */
+/*   D.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 13:37:28 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/05 15:44:20 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/09/05 16:34:06 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,26 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <map>
 using namespace std;
 
 int main()
 {
     set <long long> st;
-    map <long long, int> mp;
-    int n;
-    while(1)
+    string s;
+    long long n;
+    while(cin >> s&& cin >> n)
     {
-        cin >> n;
-        if(n == 0)
-            return 0;
-        if(n == 1)
+        
+        if(s == "insert")
+            st.insert(n);
+        else if(s == "exists")
         {
-           long long k,p;
-           cin >> k >> p;
-           mp[p] = k;
-           st.insert(p);
-        }
-        if(n == 3)
-        {
-            if(st.size() == 0)
-                cout << 0 << "\n";
+            if(st.find(n) != st.end())
+                cout << "true"<< endl;
             else
-            {
-                cout << mp[*st.begin()]  << "\n";
-                st.erase(*st.begin());
-            }
+                cout << "false" << endl;
         }
-        if(n == 2)
-        {
-            if(st.size() == 0)
-                cout << 0 << "\n";
-            else
-            {
-                cout << mp[*prev(st.end())]  << "\n";
-                st.erase(*prev(st.end()));
-            }
-        }
+        else if(s == "delete")
+            st.erase(n);
     }
 }

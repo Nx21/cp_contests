@@ -1,48 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   V.cpp                                              :+:      :+:    :+:   */
+/*   P.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/11 16:29:21 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/11 17:02:50 by nhanafi          ###   ########.fr       */
+/*   Created: 2022/09/07 19:02:28 by nhanafi           #+#    #+#             */
+/*   Updated: 2022/09/07 19:14:51 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <set>
+#include <utility>
 #include <map>
+#include <set>
+#include <algorithm>
 #include <math.h>
+#include <iterator>
 using namespace std;
-
 
 int main()
 {
-    long long n;
-    cin >> n;
-    map <int, int> mp;
-    int i = 2;
-    while(n > 1)
+    int t;
+    cin >> t;
+    for (int k = 0; k < t; k++)
     {
-        while(n % i == 0)
+        int n,m;
+        cin >> n >> m;
+        vector <string> vec(n);
+        set <string> st;
+        string s;
+        for (int i = 0; i < n; i++)
         {
-            mp[i]++;
-            n = n / i;
+            cin >> s;
+            vec[i] = s;
         }
-        i++;
+        for (int i = 0; i < m; i++)
+        {
+            cin >> s;
+            for (int j = 0; j < n; j++)
+                st.insert(vec[j] + s);
+            
+        }
+        cout << "Case " << k  + 1 << ": " << st.size() << endl;
     }
-    
-    for (std::map<int,int>::iterator  it = mp.begin(); it != mp.end(); it++)
-    {
-        if(it != mp.begin())
-            cout << "*";
-        cout << it->first;
-        if(it->second != 1)
-            cout << "^" << it->second;
-    }
-    
-    
 }

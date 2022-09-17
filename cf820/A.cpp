@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   C.cpp                                              :+:      :+:    :+:   */
+/*   A.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 09:27:29 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/11 17:13:02 by nhanafi          ###   ########.fr       */
+/*   Created: 2022/09/12 15:32:18 by nhanafi           #+#    #+#             */
+/*   Updated: 2022/09/12 15:39:58 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,24 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <map>
+#include <utility>
+#include <math.h>
 using namespace std;
+
 
 int main()
 {
-    int n;
-    long long x, res = 0;
-    cin >> n >> x;
-    vector <long long> arr(n + 1);
-    map <long long, int> mp;
-    mp[0] = 1;
-    for (int i = 1; i <= n; i++)
+    int t;
+    cin >> t;
+    while(t--)
     {
-        cin >> arr[i];
-        arr[i] += arr[i - 1];
-        res += mp[arr[i] - x];
-        mp[arr[i]]++;
+        long long a,b,c;
+        cin >> a >> b >>c;
+        if(a < c + abs(b - c))
+            cout << "1\n";
+        else if(a > c + abs(b - c))
+            cout << "2\n";
+        else
+            cout << "3\n";
     }
-    cout << res << endl;
 }

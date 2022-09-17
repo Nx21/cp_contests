@@ -1,48 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   V.cpp                                              :+:      :+:    :+:   */
+/*   O.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/11 16:29:21 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/11 17:02:50 by nhanafi          ###   ########.fr       */
+/*   Created: 2022/09/07 18:33:49 by nhanafi           #+#    #+#             */
+/*   Updated: 2022/09/07 18:44:08 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <set>
+#include <utility>
 #include <map>
+#include <set>
+#include <algorithm>
 #include <math.h>
+#include <iterator>
 using namespace std;
-
 
 int main()
 {
-    long long n;
-    cin >> n;
-    map <int, int> mp;
-    int i = 2;
-    while(n > 1)
+    string s;
+    string vowel = "aeiou";
+    int i = 0;
+    bool err = 0;
+    while (getline(cin, s))
     {
-        while(n % i == 0)
+        if(s == "")
+            break;
+        int res = 0;
+        for (int i = 0; s[i]; i++)
         {
-            mp[i]++;
-            n = n / i;
+            if(vowel.find(s[i]) != string::npos)
+                res++;
         }
+        if(i % 2 && res != 7)
+            err = 1;
+        if(i % 2 == 0 && res != 5)
+            err = 1;
         i++;
     }
-    
-    for (std::map<int,int>::iterator  it = mp.begin(); it != mp.end(); it++)
-    {
-        if(it != mp.begin())
-            cout << "*";
-        cout << it->first;
-        if(it->second != 1)
-            cout << "^" << it->second;
-    }
-    
+    if(err)
+        cout << "NO\n";
+    else 
+        cout << "YES\n";
     
 }

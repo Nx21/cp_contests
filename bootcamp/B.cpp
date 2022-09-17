@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   C.cpp                                              :+:      :+:    :+:   */
+/*   B.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 09:27:29 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/11 17:13:02 by nhanafi          ###   ########.fr       */
+/*   Created: 2022/08/04 15:49:14 by nhanafi           #+#    #+#             */
+/*   Updated: 2022/09/05 13:35:14 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,30 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <map>
 using namespace std;
 
 int main()
 {
-    int n;
-    long long x, res = 0;
-    cin >> n >> x;
-    vector <long long> arr(n + 1);
-    map <long long, int> mp;
-    mp[0] = 1;
-    for (int i = 1; i <= n; i++)
-    {
+    int n,m,a;
+    cin >> n;
+    vector <int> arr(n);
+    vector <int> res;
+    for (int i = 0; i < n; i++)
         cin >> arr[i];
-        arr[i] += arr[i - 1];
-        res += mp[arr[i] - x];
-        mp[arr[i]]++;
+    cin >> m;
+    set <int> st;
+    for (int i = 0; i < m; i++)
+    {
+        cin >> a;
+        st.insert(a);
     }
-    cout << res << endl;
+    for (int i = 0; i < n; i++)
+    {
+        if(st.find(arr[i]) == st.end())
+            res.push_back(arr[i]);
+    }
+    cout << res.size() << "\n";
+    for(int i = 0; i < res.size(); i++)
+        cout << res[i] << " ";
+    cout << "\n";
 }
