@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   A.cpp                                              :+:      :+:    :+:   */
+/*   G.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:51:08 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/24 05:11:22 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/09/24 05:47:28 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,27 @@
 #include <set>
 #include <utility>
 using namespace std;
-
+const long long mod = (long long)1e7;
 long long ft_pow(long long a, long long b, long long n)
 {
-    if(n == 1)
-        return  0;
     if(b == 0)
-        return 1 % n;
+        return 1;
     long long  p = ft_pow(a, b/2,n) % n;
     if(b % 2)
-        return (p * p * (a % n) ) % n;
-    return (p * p) % n;   
+        return ((((p % n) * (p % n)) % n) * (a % n) ) % n;
+    return ((p % n) * (p % n)) % n;   
 }
 
 int main()
 {
-    long long n;
-    cin >> n;
-    cout << ft_pow(3, n, 1e9 + 7);
+    long long t;
+    cin >> t;
+    while(t--)
+    {
+        long long a,b,c;
+        cin >> a >> b >> c;
+        b = ft_pow(b % mod, c, mod);
+        a = ft_pow(a % mod, b, mod);
+        cout << a << endl;
+    }
 }
