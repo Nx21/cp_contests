@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 14:59:21 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/09/18 21:54:02 by nhanafi          ###   ########.fr       */
+/*   Created: 2022/09/22 20:16:45 by nhanafi           #+#    #+#             */
+/*   Updated: 2022/09/22 22:47:12 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,23 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <map>
+#include <utility>
 using namespace std;
-
-long long ft_pow(long long a, long long b)
-{
-    if(b == 0)
-        return 1;
-    long long c = ft_pow(a, b/2) % 2019;
-    if(b%2)
-        return (c * c * a) % 2019 ;
-    return (c*c) % 2019;
-}
-
+long long MOD = 1e9 + 7;
 int main()
 {
-    string s;
-    long long res = 0;
-    cin >> s;
-    vector <long long> arr(s.size() + 1);
-    map <long long, int> mp;
-    mp[0] = 1;
-    for (int i = s.size() - 1; i >= 0; i--)
+    vector <long long > mat(1e6 + 1, 1e9);
+    mat[1] = 0;
+    for (int i = 2; i <= 1e6; i++)
     {
-        arr[i] = ((s[i] - '0') * ft_pow(10, s.size() - i - 1) + (arr[i + 1])) % 2019;
-        res += mp[arr[i]];
-        mp[arr[i]]++;
+        if(i % 3 == 0)
+            mat[i] = mat[i/3] + 1;
+        if(i % 2 == 0 && mat[i] > mat[i / 2] + 1)
+            mat[i] = mat[i / 2] + 1;
+        if(mat[i] > mat[i - 1] + 1)
+            mat[i] = mat[i - 1] + 1;
     }
-    for (int i = 0; i < s.size(); i++)
-        cout << arr[i] << "  ";
-    
-    // cout << res << endl;
+    long long n;
+    while(cin >> n)
+        cout << mat[n] << "\n";
 }

@@ -103,13 +103,10 @@ int main()
 {
     Matrix m(2,2,3);
     vector <vector <long long > > mat(1, vector <long long >(2));
-    mat[0][0] = 3;
-    mat[0][1] = 0;
-    Matrix ans(mat);
     long long n;
     while(cin >> n)
     {
-        Matrix res = (m ^ (n - 1)) * ans;
-        cout << (res.get(0,0) + res.get(1,0)) << '\n';
+        Matrix res = (m ^ (n - 1));
+        cout << (res.get(0,0) + res.get(1,0)) * 3 << '\n';
     }
 }
