@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   k.cpp                                              :+:      :+:    :+:   */
+/*   K.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 12:38:09 by nhanafi           #+#    #+#             */
-/*   Updated: 2023/08/11 09:26:47 by nhanafi          ###   ########.fr       */
+/*   Updated: 2023/08/12 14:50:13 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ using namespace std;
 
 long long gcd(long long a, long long b)
 {
-    if(a % b == 0)
-        return b;
-    if(b == 0)
-        return a;
-    return gcd(b , a % b);
+    return b == 0 ? a : gcd(b, a % b);   
 }
 
 int main()
@@ -31,48 +27,32 @@ int main()
     int n;
     long long g,v;
     cin >> n;
-    int i;
     vector <long long> arr(n);
-    for (i = 0; i < n; i++)
+    vector <long long> gcd1(n);
+    vector <long long> gcd2(n);
+    for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
     }
-    if(n == 1)
-        cout << arr[0] << endl;
-    if(n == 2)
-        cout << (arr[0] > arr[1] ? arr[0] : arr[1]) << endl;
-    else
+    gcd1[0] = arr[0];
+    gcd2[n - 1] = arr[n - 1];
+    for (int i = 1; i < n; i++)
     {
-        long long a = gcd(arr[0] , arr[1]);
-        long long c = gcd(arr[0] , arr[2]);
-        long long b = gcd(arr[1] , arr[2]);
-        if(a > b)
-        {
-            g = a;
-            v = arr[1];
-        }
-        else
-        {
-            g = b;
-            v = arr[0];
-        }
-        if(c > g)
-            g = c;
-        else if(v > arr[2])
-            v = arr[2];
-        // cout << g << "   " << v <<endl; 
-        for (int i = 3; i < n; i++)
-        {
-            if(gcd(g, arr[i]) > gcd(g, v))
-                g = gcd(g, arr[i]);
-            else
-            {
-                g = gcd(g, v);
-                v = arr[i];
-            }
-            // cout << g << "   " << v <<endl; 
-        }
-        cout << g <<endl;
+        gcd1[i] = gcd(gcd1[i - 1], arr[i]);
+        gcd2[n - i - 1] = gcd(gcd2[n - i], arr[n - i - 1]);
+        
     }
+    
+    long long res = 1;
+    for (size_t i = 0; i < n; i++)
+    {
+        if(!i)
+            res = max(res, gcd2[1]);
+        else if (i == n - 1)
+            res = max(res, gcd1[n - 2]);
+        else
+            res = max(res, gcd(gcd1[i - 1], gcd2[i + 1]));
+    }
+    cout << res;
         
 }
